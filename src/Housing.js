@@ -1,12 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Grid } from '@mui/material';
-import { nanoid } from "nanoid";
 
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import Divider from '@mui/material/Divider';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -21,7 +18,7 @@ const KEEP_RATE = .10
 const MONTHLY_RENT_RATE = .0055
 
 function Housing(props) {
-  const [properties, setProperties] = useState(props.properties);
+  const [properties, ] = useState(props.properties);
   const [selectedHousing, setSelectedHousing] = useState({});
   console.log("selectedHousing: ", selectedHousing)
 
