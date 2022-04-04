@@ -1,15 +1,15 @@
-name: todoapp
+name: housing
 
 on:
   push:
     # Trigger this workflow only on commits pushed to the main branch
     branches:
-      - main
+      - master
 
 # Dagger plan gets configured via client environment variables
 env:
   # This needs to be unique across all of netlify.app
-  APP_NAME: todoapp-dagger-briarrose
+  APP_NAME: housingapp-dagger-briarrose
   NETLIFY_TEAM: BriarRose
   # Get one from https://app.netlify.com/user/applications/personal
   NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
@@ -27,5 +27,5 @@ jobs:
         uses: dagger/dagger-for-github@v2
         # See all options at https://github.com/dagger/dagger-for-github
         with:
-          workdir: pkg/universe.dagger.io/examples/todoapp
+          workdir: .
           args: do deploy
