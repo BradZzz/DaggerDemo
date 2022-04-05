@@ -53,14 +53,14 @@ function Housing(props) {
   const totalSelectedPropertyValue = Object.keys(selectedHousing).reduce((total, key)=> total + parseInt(selectedHousing[key]),0)
   const totalSelectedRentalPropertyValue = parseFloat(totalSelectedPropertyValue) * MONTHLY_RENT_RATE
   const totalCoins = parseFloat(BASE_CRYPTO_VOLUME)
+  const keepRate = parseFloat(KEEP_RATE)
   const coinValue = (parseFloat(totalSelectedPropertyValue) * (1.0 - keepRate)) / totalCoins
   const stakingIncomePerCoin = (parseFloat(totalSelectedRentalPropertyValue) * (1.0 - keepRate)) / totalCoins
-  const keepRate = parseFloat(KEEP_RATE)
 
   const examplePropertyValue = 300000
 
   const INTRO_DESCRIPTION = `This is a calculator for an Initial Coin Offering (ICO) for a fictitious rental company.
-    These calculations are assuming that the company wishes to keep ${keepRate}% of the rental income and property equity
+    These calculations are assuming that the company wishes to keep ${100* keepRate}% of the rental income and property equity
     in order to cover maintenance and real estate broker fees. The rental income is calculated by multiplying the total
     property value by ${MONTHLY_RENT_RATE}. This would assume that a property of value ${formatCost(examplePropertyValue)} would rent
     for ${formatCost(examplePropertyValue * MONTHLY_RENT_RATE)}.`
@@ -69,7 +69,7 @@ function Housing(props) {
     by the total number of coins in existence. (3) New coins will be added to the total number of coins being offered by the company.
     The amount of new coins is the value of the new property acquired divided by the current value of the coins calculated in
     step 2.`
-  const SELL_PROPERTY_DESCRIPTION = `When a property is sold, {1.0-keepRate}% of the value of the property will be added to the
+  const SELL_PROPERTY_DESCRIPTION = `When a property is sold, ${100* (1.0-keepRate)}% of the value of the property will be added to the
     company vault to provide liquidity to the company's coins. Interest off of the usdc in this vault will be added to the total
     income received by staking users.`
 
