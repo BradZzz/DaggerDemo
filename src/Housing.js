@@ -53,19 +53,48 @@ function Housing(props) {
   const totalSelectedPropertyValue = Object.keys(selectedHousing).reduce((total, key)=> total + parseInt(selectedHousing[key]),0)
   const totalSelectedRentalPropertyValue = parseFloat(totalSelectedPropertyValue) * MONTHLY_RENT_RATE
   const totalCoins = parseFloat(BASE_CRYPTO_VOLUME)
-  const keepRate = parseFloat(KEEP_RATE)
   const coinValue = (parseFloat(totalSelectedPropertyValue) * (1.0 - keepRate)) / totalCoins
   const stakingIncomePerCoin = (parseFloat(totalSelectedRentalPropertyValue) * (1.0 - keepRate)) / totalCoins
+  const keepRate = parseFloat(KEEP_RATE)
+
+  const examplePropertyValue = 300000
+
+  const INTRO_DESCRIPTION = `This is a calculator for an Initial Coin Offering (ICO) for a fictitious rental company.
+    These calculations are assuming that the company wishes to keep ${keepRate}% of the rental income and property equity
+    in order to cover maintenance and real estate broker fees. The rental income is calculated by multiplying the total
+    property value by ${MONTHLY_RENT_RATE}. This would assume that a property of value ${formatCost(examplePropertyValue)} would rent
+    for ${formatCost(examplePropertyValue * MONTHLY_RENT_RATE)}.`
+  const BUY_PROPERTY_DESCRIPTION = `When a property is added to our fictitious rental company, the following actions will happen.
+    (1) First, the total value of the current property holdings will be evaluated. (2) The total value of holdings will be divided
+    by the total number of coins in existence. (3) New coins will be added to the total number of coins being offered by the company.
+    The amount of new coins is the value of the new property acquired divided by the current value of the coins calculated in
+    step 2.`
+  const SELL_PROPERTY_DESCRIPTION = `When a property is sold, {1.0-keepRate}% of the value of the property will be added to the
+    company vault to provide liquidity to the company's coins. Interest off of the usdc in this vault will be added to the total
+    income received by staking users.`
 
   return (
     <div>
-      <h1>Housing page!</h1>
-      <Item>Selected Total Coins: {BASE_CRYPTO_VOLUME}</Item>
-      <Item>Selected Keep Rate: {keepRate* 100}%</Item>
-      <Item>Selected Property Value: {formatCost(totalSelectedPropertyValue)}</Item>
-      <Item>Selected Rental Income: {formatCost(totalSelectedRentalPropertyValue)}</Item>
-      <Item>Selected Coin Value: {formatCost(coinValue)}</Item>
-      <Item>Selected Staking Income Per Coin: {formatCost(stakingIncomePerCoin)}</Item>
+      <Paper>
+        <h3>ICO</h3>
+        {INTRO_DESCRIPTION}
+      </Paper>
+      <Paper>
+        <h3>Buying Property</h3>
+        {BUY_PROPERTY_DESCRIPTION}
+      </Paper>
+      <Paper>
+        <h3>Selling Property</h3>
+        {SELL_PROPERTY_DESCRIPTION}
+      </Paper>
+      <Paper>
+          <p>Selected Total Coins: {BASE_CRYPTO_VOLUME}</p>
+          <p>Selected Keep Rate: {keepRate* 100}%</p>
+          <p>Selected Property Value: {formatCost(totalSelectedPropertyValue)}</p>
+          <p>Selected Rental Income: {formatCost(totalSelectedRentalPropertyValue)}</p>
+          <p>Selected Coin Value: {formatCost(coinValue)}</p>
+          <p>Selected Staking Income Per Coin: {formatCost(stakingIncomePerCoin)}</p>
+      </Paper>
       <h3>Properties</h3>
       <Grid container spacing={2}>
         <Grid item xs={12} style={{ height:'50em', overflowY:'auto'}}>
